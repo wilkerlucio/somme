@@ -15,5 +15,9 @@
         "lib/main.js"
       ]
     }
+  ],
+
+  "permissions": [
+    "http://isohunt.com/*"
   ]
 }
