@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Next Epidose Torrent Finder",
+  "description": "From Next Episode watch list to ISOHunt search",
+  "version": "0.1",
+
+  "content_scripts": [
+    {
+      "matches": [
+        "http://next-episode.net/track?mode=Normal"
+      ],
+
+      "js": [
+        "lib/main.js"
+      ]
+    }
+  ]
+}
