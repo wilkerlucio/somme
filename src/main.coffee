@@ -57,10 +57,11 @@ class ResultBuilder
 
   showText: (text) -> @node.html(text)
   showResults: (results) ->
-    @node.html("")
+    $.when(results).then (res) =>
+      @node.html("")
 
-    for result in results.slice(0, 5)
-      @node.append(@buildResult(result))
+      for result in res.slice(0, 5)
+        @node.append(@buildResult(result))
 
   buildResult: (result) ->
     row = $("<div>")
@@ -83,4 +84,4 @@ $(".row td").each ->
     e.preventDefault()
 
     resultDisplayer.showText("Loading download options...")
-    searchProvider.search(query).then (results) -> resultDisplayer.showResults(results)
+    resultDisplayer.showResults(searchProvider.search(query))
