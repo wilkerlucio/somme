@@ -51,7 +51,7 @@ class ResultBuilder
 
   buildResult: (result) ->
     row = $("<div>")
-    link = $("<a target=\"_blank\">#{result.name()}</a>")
+    link = $("<a target=\"_blank\">[#{result.seeders()}] #{result.name()}</a>")
     link.appendTo(row)
     $.when(result.torrentUrl()).then (url) -> link.attr("href", url)
     row
