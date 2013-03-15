@@ -41,8 +41,13 @@ class ResultBuilder
     $.when(results).then (res) =>
       @node.html("")
 
+      @showNoResults() if res.length == 0
+
       for result in res.slice(0, 5)
         @node.append(@buildResult(result))
+
+  showNoResults: ->
+    @node.html("<i>No results found</i>")
 
   buildResult: (result) ->
     row = $("<div>")
