@@ -2,3 +2,5 @@
 /dist
 /lib
 /tmp
+
+.ruby-version
