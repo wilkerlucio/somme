@@ -4,18 +4,22 @@ class NextEpisode
   @match: /^http:\/\/next-episode.net\/track(\?mode=Normal)?/i
 
   constructor: (@root, @searchProvider) ->
+    @displayerCache = {}
 
   decorate: ->
+    driver = this
+
     @root.find(".row td").each ->
       self = $(this)
       info = new EpisodeInfo(this)
       formatter = new SearchFormatter(info)
-      resultDisplayer = new ResultBuilder(this)
       query = formatter.toString()
 
       self.append(" | <a href=\"http://isohunt.com/torrents/?ihq=#{query}\" class=\"episodeinfo ihsearch\" target=\"_blank\">Search on ISOHunt</a>")
       self.find(".ihsearch").click (e) ->
         e.preventDefault()
+
+        resultDisplayer = (driver.displayerCache[query] ||= new ResultBuilder(self[0]))
 
         resultDisplayer.showText("Loading download options...")
         resultDisplayer.showResults(searchProvider.search(query))
